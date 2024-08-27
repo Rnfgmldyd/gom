@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강아지 & 고양이 나이 계산기</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 400px; margin: 0 auto; text-align: center; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>강아지 & 고양이 나이 계산기</h1>
+        
+        <label for="animal">반려동물 선택:</label>
+        <select id="animal" onchange="toggleSizeOptions()">
+            <option value="dog">강아지</option>
+            <option value="cat">고양이</option>
+        </select>
+
+        <label for="age">나이 (살):</label>
+        <select id="age">
+            <option value="1">1살</option>
+            <option value="2">2살</option>
+            <option value="3">3살</option>
+            <option value="4">4살</option>
+            <option value="5">5살</option>
+            <option value="6">6살</option>
+            <option value="7">7살</option>
+            <option value="8">8살</option>
+            <option value="9">9살</option>
+            <option value="10">10살</option>
+            <option value="11">11살</option>
+            <option value="12">12살</option>
+            <option value="13">13살</option>
+            <option value="14">14살</option>
+            <option value="15">15살</option>
+        </select>
+
+        <label for="size" id="sizeLabel">견종 크기 / 고양이 체중:</label>
+        <select id="size">
+            <option value="small">소형견 (10kg 이하)</option>
+            <option value="medium">중형견 (10~25kg)</option>
+            <option value="large">대형견 (25kg 이상)</option>
+        </select>
+
+        <button onclick="calculateAge()">사람 나이로 계산하기</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function toggleSizeOptions() {
+            const animal = document.getElementById('animal').value;
+            const sizeSection = document.getElementById('size');
+            const sizeLabel = document.getElementById('sizeLabel');
+
+            if (animal === 'cat') {
+                sizeSection.style.display = 'none';
+                sizeLabel.style.display = 'none';
+            } else {
+                sizeSection.style.display = 'block';
+                sizeLabel.style.display = 'block';
+            }
+        }
+
+        function calculateAge() {
+            const animal = document.getElementById('animal').value;
+            const age = parseInt(document.getElementById('age').value);
+            const size = document.getElementById('size').value;
+            let humanAge;
+
+            if (animal === "dog") {
+                if (size === "small") {
+                    humanAge = (age === 1) ? 15 : 
+                               (age === 2) ? 24 : 
+                               24 + ((age - 2) * 5);
+                } else if (size === "medium") {
+                    humanAge = (age === 1) ? 15 : 
+                               (age === 2) ? 24 : 
+                               24 + ((age - 2) * 6);
+                } else if (size === "large") {
+                    humanAge = (age === 1) ? 15 : 
+                               (age === 2) ? 24 : 
+                               24 + ((age - 2) * 7);
+                }
+            } else if (animal === "cat") {
+                humanAge = (age === 1) ? 15 : 
+                           (age === 2) ? 24 : 
+                           24 + ((age - 2) * 4);
+            }
+
+            document.getElementById('result').innerText = `사람 나이로 ${humanAge}살 입니다.`;
+        }
+    </script>
+</body>
+</html>
